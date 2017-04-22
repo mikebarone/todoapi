@@ -19,18 +19,24 @@ const users = [{
     }, {
         _id: userTwoId,
         email: 'marta@email.com',
-        password: 'usertwopassword'
+        password: 'usertwopassword',
+        tokens: [{
+            access: 'auth',
+            token: jwt.sign({_id: userTwoId, access: 'auth'}, 'abc123').toString()
+        }]
     }
 ];
 
 const todos = [{
     _id: new ObjectID(),
-    text: 'First test todo'
+    text: 'First test todo',
+    _creator: userOneId
 }, {
     _id: new ObjectID(),
     text: 'Second test todo',
     completed: true,
-    completedAt: 333
+    completedAt: 333,
+    _creator: userTwoId
 }];
 
 // wipe db before test and insert testing data
